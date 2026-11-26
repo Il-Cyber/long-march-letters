@@ -1398,7 +1398,7 @@ footer .stats-export:hover{border-color:var(--gold);color:var(--gold)}
         <h3>六条流向，104 封</h3>
         <div class="sub">去信与回信分方向计 · 合计 104 封</div>
         <div class="flow-rows" id="flowRows"></div>
-        <div class="flow-foot">两轮书信：第一轮 52 封、第二轮 52 封。去信与回信分两个方向计，所以<b>六条流向</b>，合计仍为 104 封。</div>
+        <div class="flow-foot">两轮书信：第一轮 52 封、第二轮 52 封。同一对学校两轮各写一封，两个方向<b>数量相等</b>：交大⇄清华各 10 封、清华⇄浙大各 18 封、浙大⇄交大各 24 封，六条流向合计 104 封。</div>
       </div>
 
       <div class="map-side reveal d2">
@@ -2470,9 +2470,9 @@ var AMAP_SEC = '0188aa3fa199c8f148ad32721457a785';
 
       /* --- 城市对：真实公路邮路 + 点击看信件量 --- */
       var PAIRS = [
-        {i:0, j:1, co:'#c0392b', name:'上海 ⇄ 北京', dist:'1213 km · 4 天', go:{n:12, dir:'交大 → 清华'}, back:{n:8, dir:'清华 → 交大'}},
-        {i:1, j:2, co:'#8c1f18', name:'北京 ⇄ 杭州', dist:'1170 km · 3 天', go:{n:20, dir:'清华 → 浙大'}, back:{n:16, dir:'浙大 → 清华'}},
-        {i:2, j:0, co:'#a8271d', name:'杭州 ⇄ 上海', dist:'170 km · 2 天',  go:{n:26, dir:'浙大 → 交大'}, back:{n:22, dir:'交大 → 浙大'}}
+        {i:0, j:1, co:'#c0392b', name:'上海 ⇄ 北京', dist:'1213 km · 4 天', go:{n:10, dir:'交大 → 清华'}, back:{n:10, dir:'清华 → 交大'}},
+        {i:1, j:2, co:'#8c1f18', name:'北京 ⇄ 杭州', dist:'1170 km · 3 天', go:{n:18, dir:'清华 → 浙大'}, back:{n:18, dir:'浙大 → 清华'}},
+        {i:2, j:0, co:'#a8271d', name:'杭州 ⇄ 上海', dist:'170 km · 2 天',  go:{n:24, dir:'浙大 → 交大'}, back:{n:24, dir:'交大 → 浙大'}}
       ];
       var lines = [];
       var info = new AMap.InfoWindow({offset: new AMap.Pixel(0, -8)});
@@ -2539,7 +2539,7 @@ var AMAP_SEC = '0188aa3fa199c8f148ad32721457a785';
           var iw = new AMap.InfoWindow({
             content: '<div style="padding:8px 4px;font-size:12px;line-height:1.8">' +
               '<b>' + s.name + ' ' + s.clg + '</b><br>参与 ' + s.people + ' 人 · 收发 ' + s.letters + ' 封<br>' +
-              '本周往来：' + (s.id === 'A' ? '上海 → 北京 12 封，杭州 → 上海 26 封' : s.id === 'B' ? '北京 → 上海 8 封，北京 → 杭州 20 封' : '杭州 → 上海 26 封，杭州 → 北京 16 封') +
+              '本周往来：' + (s.id === 'A' ? '上海 → 北京 10 封，杭州 → 上海 24 封' : s.id === 'B' ? '北京 → 上海 10 封，北京 → 杭州 18 封' : '杭州 → 上海 24 封，杭州 → 北京 18 封') +
               '</div>', offset: new AMap.Pixel(0, -30)
           });
           iw.open(map, [s.lng, s.lat]);
@@ -2598,14 +2598,14 @@ var AMAP_SEC = '0188aa3fa199c8f148ad32721457a785';
 (function(){
   var box = $('#flowRows'); if(!box) return;
   var rows = [
-    {n:'交大 → 清华', v:12, c:'#a8271d'},
-    {n:'清华 → 交大', v:8,  c:'#1e3a5f'},
-    {n:'清华 → 浙大', v:20, c:'#1e3a5f'},
-    {n:'浙大 → 清华', v:16, c:'#2f6b53'},
-    {n:'浙大 → 交大', v:26, c:'#2f6b53'},
-    {n:'交大 → 浙大', v:22, c:'#a8271d'}
+    {n:'交大 → 清华', v:10, c:'#a8271d'},
+    {n:'清华 → 交大', v:10, c:'#1e3a5f'},
+    {n:'清华 → 浙大', v:18, c:'#1e3a5f'},
+    {n:'浙大 → 清华', v:18, c:'#2f6b53'},
+    {n:'浙大 → 交大', v:24, c:'#2f6b53'},
+    {n:'交大 → 浙大', v:24, c:'#a8271d'}
   ];
-  var max = 26;
+  var max = 24;
   box.innerHTML = rows.map(function(r){
     var w = Math.round((r.v / max) * 100);
     return '<div class="flow-row"><div class="nm">' + r.n + '</div>' +
